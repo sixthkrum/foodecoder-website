@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/theme.css') }}">
+  <style>
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .bg {
+    background-image: url("{{ url_for('static',filename='img/foodiesfeed.com_beautiful-vibrant-shot-of-traditional-korean-meals.jpg') }}");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  </style>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-default sticky-top" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));	background-position: center; background-size: 100% 100%; background-repeat: no-repeat;">
+    <div id="navbarText" class="navbar-collapse justify-content-center">
+      <ul class="nav justify-content-center">
+        <li class="nav-item active mx-0 px-0">
+          <a class="nav-item nav-link text-success" style="font-weight: normal;" href="/profile">{{username}}</a>
+        </li>
+        <li class="nav-item active mx-0 px-0" style="text-align: center">
+          <a class="nav-item nav-link text-white" style="font-weight: normal;" href="/previous-results">View Previous Results</a>
+        </li>
+        <li class="nav-item active mx-0 px-0" style="text-align: center">
+          <a class="nav-item nav-link text-white" style="font-weight: normal;" href="/logout">Logout</a>
+        </li>
+        <li class="nav-item active mx-0 px-0" style="text-align: center">
+          <a class="nav-item nav-link text-white" style="font-weight: normal;" href="/delete-account">Delete Account</a>
+        </li>
+      </ul>
+    </div>
+</nav>
+
+<body class="bg">
+  <div class="text-center py-0 mb-0 pb-0">
+      <div class="row row-no-gutters mx-auto pt-1 mb-0 justify-content-center" style="width: 60%;">
+        <div class="col-lg-12 py-2 mt-3" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));	background-position: center; background-size: cover; background-repeat: no-repeat;">
+          <h1 class="text-centre text-light">Saved Results</h1>
+        </div>
+            <ol class="text-center col-lg-12 list-group list-group-flush bg-transparent pl-2 pr-2 py-1 mx-auto" style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));	background-position: center; background-size: cover; background-repeat: no-repeat;">
+              {% for imageId, result in savedResults.items() %}
+                <div class="row mb-2">
+                  <div class="col-lg-4 mb-1 ">
+                    <a style="font-weight: normal" href="{{url_for('main.results', previousResults=True, imageId=imageId)}}"> <b>{{ result.title }}</b> </a>
+                  </div>
+                  <div class="col-lg-4 mb-1">
+                    <img src="{{ url_for('static',filename='temp/'+result.path)}}" style="width:100px; height:100px"/>
+                  </div>
+                  <div class="col-lg-4 mb-1">
+                    <form action="/previous-results" method="post">
+                      <input type="hidden" name="imageId" value="{{imageId}}"/>
+                      <button type="submit" class="btn btn-outline-success text-light"><b>Delete</b></button>
+                    </form>
+                  </div>
+                </div>
+                {% endfor %}
+            </ol>
+        <div class="col-lg-12">
+            <a class="btn btn-outline-success text-light mt-1 bg-dark" style="font-weight: normal;" href='/'> Return </a>
+        </div>
+      </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" style=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" style=""></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+</body>
+
+</html>

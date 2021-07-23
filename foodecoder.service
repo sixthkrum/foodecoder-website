@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve foodecoder
+After=network.target
+
+[Service]
+User=user
+Group=www-data
+WorkingDirectory=/home/user/apps/foodecoder
+Environment="PATH=/home/user/apps/foodecoder/assvenv/bin"
+ExecStart=/home/user/apps/foodecoder/assvenv/bin/uwsgi --ini foodecoder.ini
+
+[Install]
+WantedBy=multi-user.target

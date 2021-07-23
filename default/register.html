@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='style/theme.css') }}">
+  <style>
+  body, html {
+    height: 100%;
+    margin: 0;
+  }
+
+  .bg {
+    background-image: url("{{ url_for('static',filename='img/foodiesfeed.com_table-full-of-food-in-a-steakhouse.jpg') }}");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  </style>
+</head>
+
+<body class="bg">
+  <div class="text-center justify-content-center">
+    <div class="container justify-content-center">
+      <div class="row pt-5 pb-0 justify-content-center">
+        <div class="mx-auto col-md-6 px-3 py-3 justify-content-center" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.7));	background-position: center;	background-size: 100%;	background-repeat: no-repeat;">
+          <h1 class="mb-3 text-light"><b>Register</b></h1>
+          <form method="post" action="/register" enctype="multipart/form-data">
+            <span class="text-light px-3" style="float: left; font-weight: normal"><b> Username: </b></span>
+            <div class="form-group px-3"> <input type="text" name="username" maxlength="20" class="form-control" style="font-weight: normal" required> </div>
+            <span class="text-light px-3" style="float: left; font-weight: normal"><b> Email: </b></span>
+            <div class="form-group px-3"> <input type="email" name="email" maxlength="30" class="form-control" style="font-weight: normal" required> </div>
+            <span class="text-light px-3" style="float: left; font-weight: normal"><b> Password: </b></span>
+            <div class="form-group mb-3 px-3"> <input type="password" name="password" maxlength="40" class="form-control" style="font-weight: normal" required> </div>
+            <button type="submit" class="btn btn-outline-success text-light mb-1"><b>Register</b></button>
+            <a class="btn btn-outline-success text-light mb-1" href="login"><b>Login instead</b></a>
+            <a class="btn btn-outline-success text-light mb-1" href="/"><b>Return</b></a>
+          </form>
+          <p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+              <ul class="list-group list-group-flush">
+              {% for message in messages %}
+              <li class="list-group-item list-group-item-warning" style="list-style-type:none;"><b>{{ message }}</b></li>
+              {% endfor %}
+              </ul>
+              {% endif %}
+            {% endwith %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous" style=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+</body>
+
+</html>
